@@ -8,20 +8,20 @@ from postprocess_results import read_json, get_summary
 
 bs = 768
     
-tp_sizes_test = {
-    "7b": [1]
-}
+# tp_sizes_test = {
+#     "7b": [1]
+# }
 
-tp_sizes_all = {
+tp_sizes_test = {
     "7b": [1],
     "70b": [4, 8],
 }
 
-prompt_gen_pairs_test = [
-    (2600, 60)
-]
+# prompt_gen_pairs_test = [
+#     (2600, 60)
+# ]
 
-prompt_gen_pairs_all = [
+prompt_gen_pairs_test = [
     (1200, 60),
     (1200, 128),
     (2600, 60),
@@ -103,11 +103,11 @@ def output_charts(model_size, tp, bs, prompt, gen, log_dir, out_dir):
 if __name__ == "__main__":
     args = get_args()
     if args.test:
-        tp_sizes = tp_sizes_test
-        prompt_gen_pairs = prompt_gen_pairs_test
-    else:
         tp_sizes = tp_sizes_all
         prompt_gen_pairs = prompt_gen_pairs_test_all
+    else:
+        tp_sizes = tp_sizes_test
+        prompt_gen_pairs = prompt_gen_pairs_test
 
     for model_size, tps in tp_sizes.items():
         for tp in tps:
